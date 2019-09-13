@@ -1,0 +1,51 @@
+<mat-card>
+  <h1>User Form</h1>
+  <form [formGroup]="userForm" (submit)="save()">
+  <mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput  formControlName="email" id="email" type="email"  placeholder="Email" value="" >
+        <div *ngIf="userForm.controls['email'].touched && !userForm.controls['email'].pristine" class="error-msg">
+          <div [hidden]="!userForm.controls['email'].errors?.required" class="wrong-element">Email is required.</div>
+          <div [hidden]="userForm.controls['email'].errors?.required || !userForm.controls['email'].invalid" class="wrong-element">Email is invalid.</div>
+
+        </div>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput formControlName="password" type="password" placeholder="Password" minlength="6" (ngModelChange)="reset()" required>
+        <div *ngIf="(userForm.controls['password'].touched && !userForm.controls['password'].pristine) || !validPassWord" class="error-msg">
+        <div [hidden]="!userForm.controls['password'].errors?.required" class="wrong-element">Password is required.</div>
+        <div [hidden]="!userForm.controls['password'].errors?.minlength" class="wrong-element">Password must be 6 characters long.</div>
+        <div [hidden]="validPassWord" class="wrong-element">it is a compromised password.</div>
+        </div>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput placeholder="Name">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+      <input matInput formControlName="cc_number" placeholder="Card Number" mask="0000 0000 0000 0000">
+        <div *ngIf="userForm.controls['cc_number'].errors && !userForm.controls['cc_number'].pristine" class="error-msg" >
+          <div [hidden]="!userForm.controls['cc_number'].invalid" class="wrong-element">Credit Card is invalid.</div>
+        </div>
+    </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput placeholder="Expire Date" mask="00/00">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput placeholder="CVC" mask="0000">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+    <button mat-button type="submit" color="primary">Submit</button>
+  </form>
+</mat-card>

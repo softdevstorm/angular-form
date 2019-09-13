@@ -1,0 +1,9 @@
+{
+  "/api/*": {
+    "target": "https://api.pwnedpasswords.com/range/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/api" : ""}
+  }
+}
